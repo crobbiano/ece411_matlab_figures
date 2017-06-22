@@ -2,34 +2,34 @@
 clc; clear all;
 
 s=tf('s');
-theta=linspace(0,pi/2,1000);
 pathS=[];
 pathS1=[];
 pathS2=[];
 pathS3=[];
 pathS4=[];
-for i=1:1000
+theta=linspace(0,pi/2,1000);
+for i=1:length(theta)
     pathS(end+1)=.2*exp(j*theta(i));
     pathS2(end+1)=.2*exp(j*theta(i));
 end
-for i=.2:.002:12
+for i=.2:.1:500
     pathS(end+1)=complex(i*j);
     pathS1(end+1)=complex(i*j);
 end
 % path around infinity
-theta=linspace(pi/2,-pi/2,1000);
+theta=linspace(pi/2,-pi/2,5000);
 for i=1:length(theta)
 %     pathS(i)=5*exp(j*theta(i)) + cos(10*pi*i/length(theta));
-    pathS(end+1)=12*exp(j*theta(i));
-    pathS4(end+1)=12*exp(j*theta(i));
+    pathS(end+1)=500*exp(j*theta(i));
+    pathS4(end+1)=500*exp(j*theta(i));
 end
 % path up from bottom and around pole
-for i=-12:.002:-.2
+for i=-500:.1:-.2
     pathS(end+1)=complex(i*j);
     pathS3(end+1)=complex(i*j);
 end
 theta=linspace(-pi/2,0,1000);
-for i=1:1000
+for i=1:length(theta)
     pathS(end+1)=.2*exp(j*theta(i));
     pathS2(end+1)=.2*exp(j*theta(i));
 end
@@ -40,7 +40,7 @@ pathS2=fliplr(pathS2);
 pathS3=fliplr(pathS3);
 pathS4=fliplr(pathS4);
 
-Gs=1/(s*(s+2)*(s+4));
+Gs=45/(s*(s+2)*(s+4));
 Gs2=Gs;
 
 
@@ -103,7 +103,6 @@ set(gca,'YTick',[-12 0 12])
 set(gca,'YTickLabel',{'-\infty','0','\infty'})
 % quiver(0,0,.1138,.19,'k')
 % text(.04,.04,'r = \epsilon')
-
 %% Portion 2
 pathFs2=polyval(Gs2.num{1}, pathS2)./polyval(Gs2.den{1}, pathS2);
 figure(2);clf; 
@@ -160,7 +159,6 @@ set(gca,'XTick',[-4 -2 0 2 4])
 set(gca,'XTickLabel',{'-4','-2','0' ,'2', '4'})
 set(gca,'YTick',[-12 0 12])
 set(gca,'YTickLabel',{'-\infty','0','\infty'})
-
 %% Portion 3
 pathFs3=polyval(Gs2.num{1}, pathS3)./polyval(Gs2.den{1}, pathS3);
 figure(3);clf; 
@@ -217,7 +215,6 @@ set(gca,'XTick',[-4 -2 0 2 4])
 set(gca,'XTickLabel',{'-4','-2','0' ,'2', '4'})
 set(gca,'YTick',[-12 0 12])
 set(gca,'YTickLabel',{'-\infty','0','\infty'})
-
 %% Portion 4
 pathFs4=polyval(Gs2.num{1}, pathS4)./polyval(Gs2.den{1}, pathS4);
 figure(4);clf; 
@@ -241,8 +238,8 @@ grid minor
 title('F(s)-plane')
 ylabel('Imaginary Axis');
 xlabel('Real Axis');
-ylim([-.003 .003])
-xlim([-.003, .003])
+% ylim([-.003 .003])
+% xlim([-.003, .003])
 % set(gca,'XTick',[0 ])
 % set(gca,'XTickLabel',{'0'})
 % set(gca,'YTick',[-5 0 5])
@@ -268,14 +265,12 @@ plot(complex(roots(Gs2.den{1})),'xb')
 title('s-plane')
 ylabel('Imaginary Axis');
 xlabel('Real Axis');
-ylim([-12,12])
-xlim([-12 12])
-set(gca,'XTick',[-4 -2 0 2 4 12])
-set(gca,'XTickLabel',{'-4','-2','0' ,'2', '4', '\infty'})
-set(gca,'YTick',[-12 0 12])
+ylim([-500,500])
+xlim([-5 500])
+set(gca,'XTick',[ 0  500])
+set(gca,'XTickLabel',{'0' , '\infty'})
+set(gca,'YTick',[-500 0 500])
 set(gca,'YTickLabel',{'-\infty','0','\infty'})
-
-
 %% full nyquist plot
 plotFs(pathS, Gs, 5, 0, 1001)
 
