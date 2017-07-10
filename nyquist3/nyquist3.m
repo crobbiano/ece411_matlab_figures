@@ -295,6 +295,7 @@ set(gca,'YTickLabel',{'-\infty','0','\infty'})
 
 %% full nyquist plot
 plotFs(pathS, Gs, 1, 0, 1001)
+title('$G(s)=\frac{K}{s(s+a)}$','Interpreter','latex')
 
 %% setup plot
 handles.axNumLim=10;    %limit for axes

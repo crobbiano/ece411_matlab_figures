@@ -65,3 +65,11 @@ x1 = xlim; x1=x1(2)-5;
 y1 = -.2;
 txt1 = 'k = -\infty \rightarrow ';
 text(x1,y1,txt1)
+
+% add asymptotes
+x1=-40:20;
+y1=(-24.2-22.9)/(14+33)*x1 - 10;
+plot(x1,y1,'--k')
+x2=-40:20;
+y2=(24.2+22.9)/(14+33)*x2 + 10;
+plot(x2,y2,'--k')

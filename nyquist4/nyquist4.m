@@ -17,7 +17,7 @@ for i=.2:.1:500
     pathS1(end+1)=complex(i*j);
 end
 % path around infinity
-theta=linspace(pi/2,-pi/2,5000);
+theta=linspace(pi/2,-pi/2,500);
 for i=1:length(theta)
 %     pathS(i)=5*exp(j*theta(i)) + cos(10*pi*i/length(theta));
     pathS(end+1)=500*exp(j*theta(i));

@@ -36,7 +36,7 @@ for i=1:length(theta)
 end
 pathFs2 = plotFs(pathS,Gs2, 1, 0);
 pathFs3 = plotFs(pathS,Gs3, 2, 0);
-% pathFs = plotFs(pathS,Gs2, 2, 0);
+pathFs = plotFs(pathS,Gs2, 2, 0);
 
 %% Plot the gain margin
 figure(3);clf
@@ -57,7 +57,7 @@ set(vline,'MarkerEdgeColor','k','LineStyle',':')
 % find index with element closest to Y=0 (Gain margin)
 [d didx] = min(abs(imag(pathFs(1:500))))
 plot(real(pathFs(didx)),0,'or' )
-txt1='\downarrow \omega_{pc}';
+txt1='\downarrow \omega_{gc}';
 text(real(pathFs(didx))-.01,.15,txt1)
 % add ref line for better visuals
 vline = refline([0 0]);
@@ -73,6 +73,7 @@ text(-.32,-2.8,txt1)
 xlim([-2 .1]);ylim([-5, 1])
 xlabel('Real(GH)')
 ylabel('Imaginary(GH)')
+title('$G(s)=\frac{1000}{s^3+25s^2+100s}$','Interpreter','latex')
 %% Plot the phase margin
 figure(4);clf
 plot(pathFs,'-')
@@ -99,6 +100,11 @@ vline.YData=[imag(pathFs(cidx)) 0];
 vline.XData=[real(pathFs(cidx)) real(pathFs(cidx))];
 set(vline,'MarkerEdgeColor','k','MarkerFaceColor',[0 0 0],'LineStyle',':')
 
+[d didx] = min(abs(imag(pathFs(1:500))))
+plot(real(pathFs(didx)),0,'or' )
+txt1='\downarrow \omega_{gc}';
+text(real(pathFs(didx))-.015,.1,txt1)
+
 % get unit circle reference line and plot
 arc = circr(1,0,2*pi,100);
 plot(arc(1,:), arc(2,:), 'k:')
@@ -118,6 +124,7 @@ h=text(-.28,-.02, '\Phi_{2}')
 xlim([-2 2]);ylim([-2, 2])
 xlabel('Real(GH)')
 ylabel('Imaginary(GH)')
+title('$G(s)=\frac{1000}{s^3+25s^2+100s}$','Interpreter','latex')
 %% Plot the phase margin between two similar functions
 figure(5);clf
 plot(pathFs2,'-')
